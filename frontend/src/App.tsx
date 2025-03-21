@@ -1,9 +1,10 @@
+import { LayOut } from "./layout/LayOut"
 
 function App() {
-
   return (
     <>
-    <h1>Challenge forIT</h1>
+      <h1>Challenge forIT</h1> 
+        <LayOut />
     </>
   )
 }
