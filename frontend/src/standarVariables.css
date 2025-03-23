@@ -1,0 +1,14 @@
+:root {
+  --pink: #ff07ff;
+  --dark-gray: #111111;
+  --light-gray: #212121;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+.flex_center{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+}

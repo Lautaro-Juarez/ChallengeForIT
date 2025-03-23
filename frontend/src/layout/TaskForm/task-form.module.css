@@ -1,0 +1,60 @@
+.add_task_popup {
+    position: absolute;
+    margin: auto;
+    background-color: var(--dark-gray);
+    width: 70%;
+    height: 50%;
+    border: 1px solid var(--pink);
+    align-items: start;
+    padding: 20px;
+  
+    .close_pop {
+      color: red;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+    .form_task {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin: 10px 0;
+    }
+    .task_title,
+    .task_description {
+      width: 100%;
+      height: 30px;
+      margin: 4px 0;
+      padding: 5px;
+      border-radius: 2px;
+      border: none;
+      display: flex;
+      align-items: center;
+      background-color: var(--light-gray);
+      color: var(--white);
+    }
+    .error_message {
+      color: var(--pink);
+      margin-top: 0px;
+      font-size: .7rem;
+    }
+    .add_button {
+      width: 90px;
+      height: 40px;
+      background-color: var(--pink);
+      color: var(--white);
+      font-size: 0.7rem;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      margin: 20px auto 0;
+      border-radius: 4px;
+    }
+  
+    .task_title,
+    .task_description:focus {
+      box-shadow: 0 0 5px var(--pink);
+      outline: none;
+    }
+  }
+  

@@ -25,12 +25,13 @@ interface Props {
 export const TasksProvider: React.FC<Props> = ({ children }) => {
 
     const [tasks, setTasks] = useState<Task[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         getTasksApi()
             .then(res => res.json())
             .then(data => setTasks(data.data))
-    }, [])
+    }, [loading])
 
     const getTaskById = async (taskId: string) => {
         const res = await getTaskByIdApi(taskId)
@@ -39,10 +40,12 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
     }
 
     const createTask = async (task: CreateTask) => {
-        const res = await createTaskApi(task)
+        setLoading(true)
+        console.log(task);
+        const res = await createTaskApi({...task, completed: false})
         const data = await res.json()
-        task.title === '' ? alert('must be something on inputs') : setTasks([...tasks, data])
-
+        setTasks([...tasks, data])
+        setLoading(false)
     }
 
     const deleteTask = async (id: string) => {
@@ -54,11 +57,13 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
     }
 
     const updateTask = async (id: string, task: UpdateTask) => {
+        setLoading(true)
         const res = await updateTaskApi(id, task)
         const data = await res.json()
         setTasks(
             tasks.map(task => (task.id === id ? { ...task, ...data } : task))
         )
+        setLoading(false)
     }
 
     return (

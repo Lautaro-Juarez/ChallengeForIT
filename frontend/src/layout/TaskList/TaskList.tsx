@@ -1,23 +1,20 @@
 import { useTaskContext } from "../../hooks/UseTaskContext"
+import styles from './task-list.module.css'
 import { Task } from "../../models/Task.model"
+import { TaskCard } from "./components/TaskCard/TaskCard"
+
 
 export const TaskList = () => {
     const { tasks } = useTaskContext()
 
-    console.log(tasks);
-    
     return (
-        <div>
-            <h1>TaskList</h1>
-            <ul>
-            {tasks?.map((task:Task) => (               
-                <li key={task.id}>
-                    {task.id} -- --  {task.title} --- {task.description} ---- {task.completed ?  '✅' : '❌'}--
-                </li>
-            ))}
+        <section className={styles.task_list_container}>
+            <ul className={styles.card_list}>
+                {tasks?.map((task: Task) => (
+                    <TaskCard key={task.id} {...task} />
+                ))}
             </ul>
-           
-        </div>
+        </section>
     )
 }
 
