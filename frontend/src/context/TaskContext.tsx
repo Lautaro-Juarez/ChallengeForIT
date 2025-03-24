@@ -47,20 +47,6 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
 
     }
 
-    const tasksStateCounter = async () => {
-        let completed = 0;
-        let incompleted = 0;
-      
-        if (tasks.data.length > 0) {
-          tasks.data.forEach((task) => {
-            if (task.completed) {
-              completed += 1;
-            } else {
-              incompleted += 1;
-            }
-          });
-      
-        }    }
 
     const getTaskById = async (taskId: string) => {
         try {
@@ -113,7 +99,6 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
 
             setTasks(prev => ({ error: false, data: [...(prev?.data || []), data] }));
             (false)
-            tasksStateCounter()
         } catch (error) {
             console.error("Error en updateTask:", error);
         }
