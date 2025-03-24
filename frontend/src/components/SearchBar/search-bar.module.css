@@ -1,0 +1,32 @@
+.search_bar_container {
+    width: 90%;
+    height: 80px;
+    font-size: .8rem;
+    .legend{
+        .icon{
+            margin-left: 20px;
+            cursor:pointer;
+        }
+        .icon:hover{
+            color: var(--pink);
+            scale: 1.2;
+            transition: .6s;
+        }
+    }
+   
+    .input_search{
+        width: 90%;
+        height: 50px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background-color: var(--dark-gray);
+        font-size: .6rem;
+        padding: 5px;
+        color: var(--white);
+    }
+    .input_search:focus{
+       
+        box-shadow: 0 0 5px var(--pink);
+    }
+}

@@ -15,6 +15,10 @@ export interface CreateErrors {
   description?: string
 }
 
+export type ErrorResponse = {
+  errorMessage: string
+}
+
 export type CreateTask = Pick<Task, 'title' | 'description' | 'completed'>
 
 export type UpdateTask = Partial<Task>

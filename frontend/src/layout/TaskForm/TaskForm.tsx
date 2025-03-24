@@ -5,13 +5,13 @@ import { useFormTask } from "../../hooks/useFormTask"
 import { CreateTask, Task } from "../../models/Task.model.tsx"
 
 
+
 type AddTaskProps = {
-    closePop: (value: boolean) => void,
+    closePop: (value:boolean) => void, 
     editValues?: Task
 }
 
-export const TaskForm = ({ closePop, editValues }: AddTaskProps) => {
-console.log(editValues?.id);
+export const TaskForm = ({closePop, editValues }: AddTaskProps) => {
 
     const initialValues: CreateTask = editValues ?? {
         title: "",
@@ -19,7 +19,7 @@ console.log(editValues?.id);
         completed: false,
     };
 
-    const { form, loading,errors, handleChange, handleSubmit } = useFormTask(initialValues, onValidate, editValues);
+    const { form, loading, errors, handleChange, handleSubmit } = useFormTask(initialValues, onValidate, editValues);
 
     return (
         <form className={`${styles.add_task_popup} flex_center`} onSubmit={handleSubmit}>

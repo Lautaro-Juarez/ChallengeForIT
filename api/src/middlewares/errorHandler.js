@@ -6,7 +6,6 @@ const errorHandler = (err, req, res, next) => {
   if (err instanceof ClientError) {
     return response(res, 404, [{errorMessage : err.message}]);
   }
-  console.log(err);
   
   return response(res, 500, "Error interno del servidor");
 };

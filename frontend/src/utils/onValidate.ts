@@ -1,6 +1,6 @@
-import { CreateErrors, CreateTask } from "../models/Task.model";
+import { CreateErrors, CreateTask } from "../models/Task.model.tsx";
 
-export  const onValidate = (form: CreateTask) => {
+export const onValidate = (form: CreateTask) => {
 
         const errors: CreateErrors = {};
 

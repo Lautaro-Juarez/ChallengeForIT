@@ -1,21 +1,25 @@
 import { createContext, useEffect, useState } from "react"
-import { Task, CreateTask, UpdateTask } from "../models/Task.model.tsx"
+import { Task, CreateTask, UpdateTask, TaskResponse } from "../models/Task.model.tsx"
 import { getTasksApi, createTaskApi, updateTaskApi, deleteTaskApi, getTaskByIdApi } from "../api/ApiTask.tsx"
 
 interface TaskContextValue {
-    tasks: Task[],
+    tasks: TaskResponse,
     getTaskById: (taskId: string) => Promise<Task | undefined>;
-    createTask: (task: Task) => Promise<void>,
+    createTask: (task: CreateTask) => Promise<void>,
     deleteTask: (taskId: string) => Promise<void>,
-    updateTask: (taskId: string, task: UpdateTask) => Promise<void>
+    updateTask: (taskId: string, task: UpdateTask) => Promise<void>,
+    searchTask: (title: string) => void,
+    searched: TaskResponse 
 }
 
 export const TasksContext = createContext<TaskContextValue>({
-    tasks: [],
+    tasks: { error: false, data: [] },
     getTaskById: async () => undefined,
     createTask: async () => { },
     deleteTask: async () => { },
-    updateTask: async () => { }
+    updateTask: async () => { },
+    searchTask: () => { },
+    searched: {error: false, data: []}
 })
 
 interface Props {
@@ -24,50 +28,92 @@ interface Props {
 
 export const TasksProvider: React.FC<Props> = ({ children }) => {
 
-    const [tasks, setTasks] = useState<Task[]>([])
+    const [tasks, setTasks] = useState<TaskResponse>({ error: false, data: [] })
     const [loading, setLoading] = useState<boolean>(false)
+    const [searched, setSearched] = useState<TaskResponse>({ error: false, data: [] })
 
     useEffect(() => {
-        getTasksApi()
-            .then(res => res.json())
-            .then(data => setTasks(data.data))
+        getTasks()
     }, [loading])
 
-    const getTaskById = async (taskId: string) => {
-        const res = await getTaskByIdApi(taskId)
-        const data = await res.json()
-        return data
-    }
-
-    const createTask = async (task: CreateTask) => {
-        setLoading(true)
-        console.log(task);
-        const res = await createTaskApi({...task, completed: false})
-        const data = await res.json()
-        setTasks([...tasks, data])
-        setLoading(false)
-    }
-
-    const deleteTask = async (id: string) => {
-        const res = await deleteTaskApi(id)
-        if (res.status === 204) {
-            setTasks(tasks.filter(task => task.id !== id))
+    const getTasks = async () => {
+        try {
+            const res = await getTasksApi();
+            const data = await res.json();
+            setTasks(data)
+        } catch (error) {
+            console.error("Error en getTaskById:", error);
         }
 
     }
 
-    const updateTask = async (id: string, task: UpdateTask) => {
-        setLoading(true)
-        const res = await updateTaskApi(id, task)
-        const data = await res.json()
-        setTasks(
-            tasks.map(task => (task.id === id ? { ...task, ...data } : task))
-        )
-        setLoading(false)
+    const getTaskById = async (taskId: string) => {
+        try {
+            const res = await getTaskByIdApi(taskId);
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Error al obtener la tarea");
+
+            return data;
+        } catch (error) {
+            console.error("Error en getTaskById:", error);
+            return undefined;
+        }
+    };
+
+    const createTask = async (task: CreateTask) => {
+        setLoading(true);
+        try {
+            const res = await createTaskApi({ ...task, completed: false });
+            const data = await res.json();
+            setTasks(prev => ({ error: false, data: [...(prev?.data || []), data] }));
+            (false)
+        } catch (error) {
+            console.error("Error en createTask:", error);
+        }
+        setLoading(false);
+    };
+
+
+    const deleteTask = async (taskId: string) => {
+        try {
+            setLoading(true);
+            const res = await deleteTaskApi(taskId);
+            const data = await res.json();
+            if (res.status !== 200) throw new Error("Error al eliminar la tarea");
+            setTasks(prev => ({ error: false, data: [...(prev?.data || []), data] }));
+            setLoading(false);
+        }
+        catch (error) {
+            console.error("Error en deleteTask:", error);
+        }
+    };
+
+    const updateTask = async (taskId: string, task: UpdateTask) => {
+        setLoading(true);
+        try {
+            const res = await updateTaskApi(taskId, task);
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.message || "Error al actualizar la tarea");
+
+            setTasks(prev => ({ error: false, data: [...(prev?.data || []), data] }));
+            (false)
+        } catch (error) {
+            console.error("Error en updateTask:", error);
+        }
+        setLoading(false);
+    };
+
+    const searchTask = (title: string) => {
+        const foundTask = tasks.data.filter((task:Task) => task.title.trim().toLowerCase().includes(title.trim().toLowerCase()))
+        setSearched(foundTask.length > 0 
+            ? { error: false, data: foundTask } 
+            : { error: true, data: []}
+        );
     }
 
     return (
-        <TasksContext.Provider value={{ tasks, getTaskById, createTask, deleteTask, updateTask }}>
+        <TasksContext.Provider value={{ tasks, getTaskById, createTask, deleteTask, updateTask, searchTask, searched }}>
             {children}
         </TasksContext.Provider>
     )
