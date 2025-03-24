@@ -52,9 +52,9 @@
 6. **¡Listo!**  
    El proyecto debería estar corriendo localmente. Si todo salió bien, puedes acceder a la aplicación en el navegador. 🎉
 
-![server_running](./screenshots/server_running.PNG)
-![initial_command](./screenshots/initial_command.PNG)
-![swagger_docs](./screenshots/swagger_docs.PNG)
-![empty_task_list](./screenshots/empty_task_list.PNG)
-![delete](./screenshots/delete.PNG)
-![search](./screenshots/search.PNG)
+![server_running](screenshots/server_running.PNG)
+![initial_command](screenshots/initial_command.PNG)
+![swagger_docs](screenshots/swagger_docs.PNG)
+![empty_task_list](screenshots/empty_task_list.PNG)
+![delete](screenshots/delete.PNG)
+![search](screenshots/search.PNG)
