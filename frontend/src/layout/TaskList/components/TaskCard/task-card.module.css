@@ -1,0 +1,102 @@
+.card_container {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 0px;
+  .about_task {
+    width: 70%;
+    min-widht: 160px;
+    height: 90%;
+    margin: 0px 10px;
+    padding: 0;
+    align-items: start;
+    margin: 0px;
+    .title {
+      margin: 10px;
+    }
+    .description {
+      margin: 10px;
+    }
+  }
+  .task_state {
+    width: 30%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .created {
+      height: 40px;
+      width: 40px;
+      font-size: 1rem;
+    }
+    .edit_task {
+      height: 40px;
+      width: 40px;
+      font-size: 1rem;
+    }
+    .edit_task:hover {
+      color: var(--pink);
+    }
+    .delete_task {
+      height: 40px;
+      width: 40px;
+      font-size: 1rem;
+      background-color: var(red);
+    }
+    .delete_task:hover {
+      color: var(--pink);
+    }
+  }
+}
+
+.completed {
+  height: 40px;
+  width: 40px;
+  font-size: 1rem;
+  background-color: var(--light-gray);
+
+  margin-right: 10px;
+}
+.completed {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.completed:checked {
+  border-color: var(--pink);
+}
+
+.completed:checked::before {
+  content: '✔';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 8px;
+  color: var(--pink);
+  text-align: center;
+  line-height: 16px; 
+  font-size: 14px;
+}
+.completed::before {
+  content: '';
+}
+
+
+.card_container:hover {
+  cursor: pointer;
+  background-color: var(--light-gray);
+  border-radius: 2px;
+  border-bottom: 0.5px solid var(--pink);
+  box-shadow: 0 0.5px var(--pink);
+}

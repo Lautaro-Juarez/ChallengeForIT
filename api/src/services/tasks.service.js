@@ -33,7 +33,7 @@ const updateTaskService = async (taskId, task) => {
     return foundTask; 
 };
 const deleteTaskService = async (taskId) => {
-    const foundTask = tasksData.findIndex(taskItem => taskItem.id == taskId);
+    const foundTask = tasksData.find(taskItem => taskItem.id == taskId);
     if(!foundTask) throw new ClientError("La tarea no existe",404);
     tasksData.splice(foundTask, 1)
     return tasksData;
