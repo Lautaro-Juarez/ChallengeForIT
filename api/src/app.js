@@ -1,8 +1,8 @@
-import express from 'express'
-import taskRoutes from './routes/task.routes.js'
-import { envs } from './utils/envs.js'
-import cors from 'cors'
-import errorHandler from './middlewares/errorHandler.js'
+import express from "express"
+import taskRoutes from "./routes/task.routes.js"
+import { envs } from "./utils/envs.js"
+import cors from "cors"
+import errorHandler from "./middlewares/errorHandler.js"
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.js";
 import swaggerJSDoc from "swagger-jsdoc";

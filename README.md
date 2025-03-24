@@ -51,3 +51,8 @@
 
 6. **¡Listo!**  
    El proyecto debería estar corriendo localmente. Si todo salió bien, puedes acceder a la aplicación en el navegador. 🎉
+
+
+#Proyecto en ejecución
+
+![screenshot](./)

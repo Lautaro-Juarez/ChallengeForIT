@@ -35,7 +35,7 @@ export const TaskCard = (taskInfo: Task) => {
                 }}>
                     <FaTrash />
                 </small>
-                <p className={styles.created}>12</p>
+                <p className={styles.created}>📅</p>
             </article>
 
             {showForm && <TaskForm editValues={taskInfo} closePop={setShowForm} />}
