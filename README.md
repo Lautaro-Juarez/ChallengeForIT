@@ -46,7 +46,7 @@
    Luego ejecuta el servidor backend con el siguiente comando:
 
    ```bash
-   npm run start
+   pnpm run start
    ```
 
 6. **¡Listo!**  
