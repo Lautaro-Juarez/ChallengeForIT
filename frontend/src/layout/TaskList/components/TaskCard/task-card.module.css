@@ -6,6 +6,7 @@
   align-items: center;
   font-size: 0.8rem;
   padding: 0px;
+  box-shadow: 0 1px 0 0 var(--pink);
   .about_task {
     width: 70%;
     min-widht: 160px;
@@ -92,11 +93,3 @@
   content: '';
 }
 
-
-.card_container:hover {
-  cursor: pointer;
-  background-color: var(--light-gray);
-  border-radius: 2px;
-  border-bottom: 0.5px solid var(--pink);
-  box-shadow: 0 0.5px var(--pink);
-}

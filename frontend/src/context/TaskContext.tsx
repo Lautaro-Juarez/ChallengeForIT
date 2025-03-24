@@ -9,7 +9,7 @@ interface TaskContextValue {
     deleteTask: (taskId: string) => Promise<void>,
     updateTask: (taskId: string, task: UpdateTask) => Promise<void>,
     searchTask: (title: string) => void,
-    searched: TaskResponse 
+    searched: TaskResponse,
 }
 
 export const TasksContext = createContext<TaskContextValue>({
@@ -19,7 +19,7 @@ export const TasksContext = createContext<TaskContextValue>({
     deleteTask: async () => { },
     updateTask: async () => { },
     searchTask: () => { },
-    searched: {error: false, data: []}
+    searched: { error: false, data: [] },
 })
 
 interface Props {
@@ -46,6 +46,21 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
         }
 
     }
+
+    const tasksStateCounter = async () => {
+        let completed = 0;
+        let incompleted = 0;
+      
+        if (tasks.data.length > 0) {
+          tasks.data.forEach((task) => {
+            if (task.completed) {
+              completed += 1;
+            } else {
+              incompleted += 1;
+            }
+          });
+      
+        }    }
 
     const getTaskById = async (taskId: string) => {
         try {
@@ -98,6 +113,7 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
 
             setTasks(prev => ({ error: false, data: [...(prev?.data || []), data] }));
             (false)
+            tasksStateCounter()
         } catch (error) {
             console.error("Error en updateTask:", error);
         }
@@ -105,15 +121,15 @@ export const TasksProvider: React.FC<Props> = ({ children }) => {
     };
 
     const searchTask = (title: string) => {
-        const foundTask = tasks.data.filter((task:Task) => task.title.trim().toLowerCase().includes(title.trim().toLowerCase()))
-        setSearched(foundTask.length > 0 
-            ? { error: false, data: foundTask } 
-            : { error: true, data: []}
+        const foundTask = tasks.data.filter((task: Task) => task.title.trim().toLowerCase().includes(title.trim().toLowerCase()))
+        setSearched(foundTask.length > 0
+            ? { error: false, data: foundTask }
+            : { error: true, data: [] }
         );
     }
 
     return (
-        <TasksContext.Provider value={{ tasks, getTaskById, createTask, deleteTask, updateTask, searchTask, searched }}>
+        <TasksContext.Provider value={{ tasks, getTaskById, createTask, deleteTask, updateTask, searchTask, searched}}>
             {children}
         </TasksContext.Provider>
     )

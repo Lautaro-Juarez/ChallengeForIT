@@ -4,8 +4,6 @@ import { onValidate } from "../../utils/onValidate"
 import { useFormTask } from "../../hooks/useFormTask"
 import { CreateTask, Task } from "../../models/Task.model.tsx"
 
-
-
 type AddTaskProps = {
     closePop: (value:boolean) => void, 
     editValues?: Task
@@ -24,7 +22,7 @@ export const TaskForm = ({closePop, editValues }: AddTaskProps) => {
     return (
         <form className={`${styles.add_task_popup} flex_center`} onSubmit={handleSubmit}>
             <small className={styles.close_pop} onClick={() => closePop(false)}><FaX /></small>
-
+            {editValues ? <h3>Editar Tarea</h3> : <h3>Crear tarea</h3>}
             <label className={styles.form_task}>titulo</label>
             <input
                 type="text"
@@ -35,7 +33,6 @@ export const TaskForm = ({closePop, editValues }: AddTaskProps) => {
                 value={form.title}
             />
             {errors.title && <small className={styles.error_message} >{errors.title}</small>}
-
             <label className={styles.form_task}>descripción</label>
             <textarea
                 className={styles.task_description}

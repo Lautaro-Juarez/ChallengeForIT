@@ -1,5 +1,5 @@
 import { useTaskContext } from "../../hooks/UseTaskContext"
-import styles from './task-list.module.css'
+import styles from "./task-list.module.css"
 import { Task } from "../../models/Task.model"
 import { TaskCard } from "./components/TaskCard/TaskCard"
 
@@ -25,8 +25,6 @@ export const TaskList = () => {
                         </div>
                     </>
                 )}
-
-
                 {searched.data.length === 0 && tasks?.error && <h3>Aún no hay tareas</h3>}
                 {searched.data.length === 0 && !tasks?.error &&
                     tasks?.data?.map((task: Task) => <TaskCard key={task.id} {...task} />)

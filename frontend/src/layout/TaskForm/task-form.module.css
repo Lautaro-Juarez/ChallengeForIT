@@ -2,12 +2,12 @@
     position: absolute;
     margin: auto;
     background-color: var(--dark-gray);
-    width: 70%;
-    height: 50%;
+    width: 300px;
+    height: 250px;
     border: 1px solid var(--pink);
     align-items: start;
     padding: 20px;
-  
+    top: 100px;
     .close_pop {
       color: red;
       position: absolute;
@@ -51,7 +51,7 @@
       border-radius: 4px;
     }
   
-    .task_title,
+    .task_title:focus,
     .task_description:focus {
       box-shadow: 0 0 5px var(--pink);
       outline: none;

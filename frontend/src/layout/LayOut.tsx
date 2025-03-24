@@ -5,7 +5,6 @@ import { TaskForm } from "./TaskForm/TaskForm.tsx"
 import { useState } from "react"
 import { SearchBar } from "../components/SearchBar/SearchBar.tsx"
 
-
 export const LayOut = () => {
 
     const [showForm, setShowForm] = useState(false)
@@ -15,7 +14,6 @@ export const LayOut = () => {
                 <h1 className={styles.title}>Task List</h1>
                 <SearchBar/>
                 <TaskList />
-             
                 <small className={`${styles.add_task} flex_center`} >
                     <FaPlus onClick={() => setShowForm(true)} />
                 </small>

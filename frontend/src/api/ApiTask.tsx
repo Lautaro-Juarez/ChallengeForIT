@@ -1,6 +1,6 @@
 import { CreateTask, UpdateTask } from "../models/Task.model.tsx";
 
-const API = "http://localhost:3000/api";
+const API = import.meta.env.VITE_API
 
 const createTaskApi = async (task: CreateTask) => {
     return fetch(`${API}/tasks`, {
